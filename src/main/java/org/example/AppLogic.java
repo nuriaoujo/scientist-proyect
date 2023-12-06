@@ -15,6 +15,7 @@ public class AppLogic {
         System.out.println( "(1). Crear un nuevo proyecto \n" +
                             "(2). Mostrar información del proyecto"
         );
+
         do {
             this.proyectOperation = kb.nextInt();
             switch (this.proyectOperation) {
@@ -28,11 +29,9 @@ public class AppLogic {
                     break;
                 default:
                     System.out.println("ERROR, el valor insertado no es correcto");
-
                     break;
             }
         } while (this.proyectOperation < 1 || this.proyectOperation > 2);
-        kb.close();
     }
 
     public void createNewProyect() {
@@ -42,24 +41,54 @@ public class AppLogic {
                             "¿Quieres generar un nuevo proyecto?"
         );
         System.out.println("SI(1), NO(2)");
-        int createProyect = kb.nextInt();
+        this.proyectOperation = kb.nextInt();
 
-        switch (createProyect) {
-            case 1:
-                System.out.println("Has seleccionado: Generar nuevo proyecto");
-                break;
-            case 2:
-                System.out.println("Has seleccionado: Cancelar acción");
-                break;
-            default:
-                System.out.println("ERROR, la opción no es válida");
-                createNewProyect();
-                break;
-        }
+        do {
+            switch (this.proyectOperation) {
+                case 1:
+                    System.out.println("Has seleccionado: Generar nuevo proyecto");
+                    break;
+                case 2:
+                    System.out.println("Has seleccionado: Cancelar acción");
+                    homeProyect();
+                    break;
+                default:
+                    System.out.println("ERROR, la opción no es válida");
+                    createNewProyect();
+                    break;
+            }
+        } while (this.proyectOperation < 1 || this.proyectOperation > 2);
+
+        closeProyectApp();
     }
 
     public void showProyectDetails() {
         System.out.println("Mostrando detalles del proyecto...");
         System.out.println("///////////////////////////////////////");
+
+        closeProyectApp();
+    }
+
+    public void closeProyectApp() {
+        System.out.println("Quieres realizar otra operación?");
+        System.out.println("SI(1), NO(2)");
+
+        do {
+            this.proyectOperation = kb.nextInt();
+            switch (this.proyectOperation) {
+                case 1:
+                    System.out.println("Serás redirigido al menú de inicio...");
+                    System.out.println("///////////////////////////////////////");
+                    homeProyect();
+                    break;
+                case 2:
+                    System.out.println("Cerrando aplicación...");
+                    System.out.println("///////////////////////////////////////");
+                    break;
+                default:
+                    System.out.println("ERROR, el valor insertado no es correcto");
+                    break;
+            }
+        } while (this.proyectOperation < 1 || this.proyectOperation > 2);
     }
 }
