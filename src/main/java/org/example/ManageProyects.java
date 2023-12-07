@@ -119,7 +119,36 @@ public class ManageProyects {
     }
 
     public void showProyectDetails() {
-        System.out.println("Mostrando detalles del proyecto...");
+        System.out.println("Mostrando detalles de los proyectos...");
         System.out.println("///////////////////////////////////////");
+
+        if (proyectsList.isEmpty()) {
+            System.out.println("ERROR: No existe ningún proyecto en la base de datos");
+        } else {
+            System.out.println("Estos son los proyectos registrados: ");
+            for(int i = 0; i < proyectsList.size(); i++) {
+                System.out.println("(" + (i+1) + "). " + proyectsList.get(i).getName());
+            }
+            System.out.println("Selecciona el proyecto del que deseas ver más detalles");
+
+            do{
+                this.proyectOperation = kb.nextInt();
+                System.out.println("Nombre: " + proyectsList.get(proyectOperation -1).getName());
+                System.out.println("Departamento: " + proyectsList.get(proyectOperation -1).getDepartment());
+                System.out.println("Presupuesto: " + proyectsList.get(proyectOperation -1).getBudget());
+                System.out.println("Duración: " + proyectsList.get(proyectOperation -1).getDuration());
+                System.out.println("/////////////////CIENTIFICOS EN PROCESO/////////////////");
+            } while( proyectOperation < 1 || proyectOperation > (proyectsList.size() + 1));
+
+            System.out.println("///////////////////////////////////////");
+            System.out.println("¿Quieres ver los detalles de otro proyecto registrado?");
+            System.out.println("SI(1), NO(2)");
+            this.proyectOperation = kb.nextInt();
+
+            if(proyectOperation == 1) {
+                System.out.println("...");
+                showProyectDetails();
+            }
+        }
     }
 }
