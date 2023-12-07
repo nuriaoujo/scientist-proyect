@@ -139,6 +139,13 @@ public class AppLogic {
         closeProyectApp();
     }
 
+    public void showScientistDetails() {
+        System.out.println("Mostrando los científicos...");
+        System.out.println("///////////////////////////////////////");
+
+        closeProyectApp();
+    }
+
     public void closeProyectApp() {
         System.out.println("Quieres realizar otra operación?");
         System.out.println("SI(1), NO(2)");
