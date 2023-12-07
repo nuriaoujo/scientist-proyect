@@ -6,8 +6,9 @@ public class AppLogic {
     private Scanner kb = new Scanner(System.in);
     private int proyectOperation;
 
-    private ManageProyects manageProyects;
-    private ManageScientist manageScientist;
+
+    ManageProyects manageProyects = new ManageProyects();
+    ManageScientist manageScientist = new ManageScientist();
 
     public AppLogic() { }
 

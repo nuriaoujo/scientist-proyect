@@ -2,6 +2,7 @@ package org.example;
 
 public class ManageScientist {
 
+    private Scientists scientists;
     public ManageScientist() { }
 
 

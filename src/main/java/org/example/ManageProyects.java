@@ -1,12 +1,19 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ManageProyects {
-
-    private Proyects proyects;
+    private Proyects newproyect;
+    private String proyectName;
+    private int proyectDepartment;
+    private int proyectBudget;
+    private int proyectDuration;
     private int proyectOperation;
+
     private Scanner kb = new Scanner(System.in);
+    private List<Proyects> proyectsList = new ArrayList<>();
 
     public ManageProyects() {}
 
@@ -16,7 +23,7 @@ public class ManageProyects {
 
         do { //Proyect name
             System.out.println("Inserta el nombre de tu proyecto");
-            String proyectName = kb.nextLine();
+            this.proyectName = kb.nextLine();
             System.out.println( "El nombre seleccionado es: " + proyectName + ",\n" +
                     "¿Estás seguro de querer este nombre?"
             );
@@ -26,18 +33,17 @@ public class ManageProyects {
             if(this.proyectOperation == 1) {
                 System.out.println("El nombre ha sido insertado exitósamente");
                 System.out.println("///////////////////////////////////////");
-                proyects.setName(proyectName);
             }
         } while (proyectOperation != 1);
 
-        int proyectDepartment;
+
         do { //Proyect department
             System.out.println("Selecciona el departamento");
             System.out.println( "(1). Departamento de Márketing \n" +
                     "(2). Departamento de Investigación \n" +
                     "(3). Departamento de Informática"
             );
-            proyectDepartment = kb.nextInt();
+            this.proyectDepartment = kb.nextInt();
             String departmentName;
             switch (proyectDepartment) {
                 case 1:
@@ -64,14 +70,13 @@ public class ManageProyects {
                 if(this.proyectOperation == 1) {
                     System.out.println("El departamento ha sido seleccionado exitósamente");
                     System.out.println("///////////////////////////////////////");
-                    proyects.setDepartment(departmentName);
                 }
             }
         } while (proyectOperation != 1 || proyectDepartment < 1 || proyectDepartment > 3);
 
         do { //Proyect budget
             System.out.println("Inserta el presupuesto de tu proyecto");
-            int proyectBudget = kb.nextInt();
+            this.proyectBudget = kb.nextInt();
             System.out.println( "El presupuesto insertado es: " + proyectBudget + ",\n" +
                     "¿Estás seguro de este presupuesto?"
             );
@@ -81,13 +86,12 @@ public class ManageProyects {
             if(this.proyectOperation == 1) {
                 System.out.println("El presupuesto ha sido insertado exitósamente");
                 System.out.println("///////////////////////////////////////");
-                proyects.setBudget(proyectBudget);
             }
         } while (proyectOperation != 1);
 
         do { //Proyect duration
             System.out.println("Inserta la duración del proyecto (en meses)");
-            int proyectDuration = kb.nextInt();
+            this.proyectDuration = kb.nextInt();
             System.out.println( "El total de los meses insertados es: " + proyectDuration + ",\n" +
                     "¿Estás seguro de que este valor es correcto?"
             );
@@ -97,7 +101,7 @@ public class ManageProyects {
             if(this.proyectOperation == 1) {
                 System.out.println("La duración ha sido insertado exitósamente");
                 System.out.println("///////////////////////////////////////");
-                proyects.setDuration(proyectDuration);
+                newproyect.setDuration(proyectDuration);
             }
         } while (proyectOperation != 1);
 
