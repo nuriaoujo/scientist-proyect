@@ -7,12 +7,14 @@ import java.util.Scanner;
 public class ManageProyects {
     private Proyects newproyect;
     private String proyectName;
+    private String departmentName;
     private int proyectDepartment;
     private int proyectBudget;
     private int proyectDuration;
     private int proyectOperation;
 
     private Scanner kb = new Scanner(System.in);
+    private Scanner kbTxt = new Scanner(System.in);
     private List<Proyects> proyectsList = new ArrayList<>();
 
     public ManageProyects() {}
@@ -23,7 +25,7 @@ public class ManageProyects {
 
         do { //Proyect name
             System.out.println("Inserta el nombre de tu proyecto");
-            this.proyectName = kb.nextLine();
+            this.proyectName = kbTxt.nextLine();
             System.out.println( "El nombre seleccionado es: " + proyectName + ",\n" +
                     "¿Estás seguro de querer este nombre?"
             );
@@ -44,20 +46,19 @@ public class ManageProyects {
                     "(3). Departamento de Informática"
             );
             this.proyectDepartment = kb.nextInt();
-            String departmentName;
             switch (proyectDepartment) {
                 case 1:
-                    departmentName = "Márketing";
+                    this.departmentName = "Márketing";
                     break;
                 case 2:
-                    departmentName = "Investigación";
+                    this.departmentName = "Investigación";
                     break;
                 case 3:
-                    departmentName = "Informática";
+                    this.departmentName = "Informática";
                     break;
                 default:
                     System.out.println("El valor seleccionado no es válido");
-                    departmentName = "";
+                    this.departmentName = "";
                     break;
             }
             if (proyectDepartment == 1 || proyectDepartment == 2 || proyectDepartment == 3) {
@@ -101,13 +102,20 @@ public class ManageProyects {
             if(this.proyectOperation == 1) {
                 System.out.println("La duración ha sido insertado exitósamente");
                 System.out.println("///////////////////////////////////////");
-                newproyect.setDuration(proyectDuration);
             }
         } while (proyectOperation != 1);
 
         //Científicos en proceso!!
         System.out.println("Selecciona el/los científicos del proyecto");
         System.out.println("/////////////////////EN PROCESO/////////////////////");
+
+        System.out.println("El científico ha sido registrado exitósamente");
+        System.out.println("///////////////////////////////////////");
+        this.newproyect = new Proyects(proyectName, departmentName, proyectBudget, proyectDuration, null);
+        proyectsList.add(newproyect);
+        System.out.println("Registrando nuevo proyecto...");
+        System.out.println("El proyecto " + newproyect.getName() + " ha sido registrado exitósamente");
+        System.out.println("///////////////////////////////////////");
     }
 
     public void showProyectDetails() {

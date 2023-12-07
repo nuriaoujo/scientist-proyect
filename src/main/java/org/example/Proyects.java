@@ -9,7 +9,7 @@ public class Proyects {
     private Integer budget;
     private Integer duration;
     private Scientists scientists;
-    private List<Scientists>scientistsList;
+    private List<String>scientistsList;
 
     //Get y Set
     public String getName() { return name; }
@@ -27,11 +27,11 @@ public class Proyects {
     public Scientists getScientists() { return scientists; }
     public void setScientists(Scientists scientists) { this.scientists = scientists; }
 
-    public List<Scientists>getScientistsList() { return scientistsList; }
-    public void setScientistsList(List<Scientists>scientistsList) { this.scientistsList = scientistsList; }
+    public List<String>getScientistsList() { return scientistsList; }
+    public void setScientistsList(List<String>scientistsList) { this.scientistsList = scientistsList; }
 
     //Constructor
-    public Proyects (String name, String department, Integer budget, Integer duration, List<Scientists>scientistsList) {
+    public Proyects (String name, String department, Integer budget, Integer duration, List<String>scientistsList) {
         this.name = name;
         this.department = department;
         this.budget = budget;
