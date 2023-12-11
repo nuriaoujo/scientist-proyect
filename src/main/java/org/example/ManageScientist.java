@@ -54,7 +54,7 @@ public class ManageScientist {
 
         do { //Scientist address
             System.out.println("Inserta su dirección");
-            this.scientistsDirection = kb.nextLine();
+            this.scientistsDirection = kbTxt.nextLine();
             System.out.println( "La dirección seleccionada es: " + scientistsDirection + ",\n" +
                     "¿Estás seguro de la dirección insertada?"
             );
@@ -89,9 +89,13 @@ public class ManageScientist {
 
             do{
                 this.proyectOperation = kb.nextInt();
-                System.out.println("Nombre: " + scientistsRegistrationList.get(proyectOperation -1).getName());
-                System.out.println("Edad: " + scientistsRegistrationList.get(proyectOperation -1).getAge());
-                System.out.println("Dirección: " + scientistsRegistrationList.get(proyectOperation -1).getAddress());
+                if (proyectOperation < 1 || proyectOperation > (scientistsRegistrationList.size() + 1)) {
+                    System.out.println("El valor insertado no es válido, por favor inserte otro valor");
+                } else {
+                    System.out.println("Nombre: " + scientistsRegistrationList.get(proyectOperation -1).getName());
+                    System.out.println("Edad: " + scientistsRegistrationList.get(proyectOperation -1).getAge());
+                    System.out.println("Dirección: " + scientistsRegistrationList.get(proyectOperation -1).getAddress());
+                }
             } while( proyectOperation < 1 || proyectOperation > (scientistsRegistrationList.size() + 1));
 
             System.out.println("///////////////////////////////////////");
