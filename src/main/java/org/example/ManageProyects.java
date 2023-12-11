@@ -133,11 +133,15 @@ public class ManageProyects {
 
             do{
                 this.proyectOperation = kb.nextInt();
-                System.out.println("Nombre: " + proyectsList.get(proyectOperation -1).getName());
-                System.out.println("Departamento: " + proyectsList.get(proyectOperation -1).getDepartment());
-                System.out.println("Presupuesto: " + proyectsList.get(proyectOperation -1).getBudget());
-                System.out.println("Duración: " + proyectsList.get(proyectOperation -1).getDuration());
-                System.out.println("/////////////////CIENTIFICOS EN PROCESO/////////////////");
+                if (proyectOperation < 1 || proyectOperation > (proyectsList.size() + 1)) {
+                    System.out.println("El valor insertado no es válido, por favor inserte otro");
+                } else {
+                    System.out.println("Nombre: " + proyectsList.get(proyectOperation - 1).getName());
+                    System.out.println("Departamento: " + proyectsList.get(proyectOperation - 1).getDepartment());
+                    System.out.println("Presupuesto: " + proyectsList.get(proyectOperation - 1).getBudget());
+                    System.out.println("Duración: " + proyectsList.get(proyectOperation - 1).getDuration());
+                    System.out.println("/////////////////CIENTIFICOS EN PROCESO/////////////////");
+                }
             } while( proyectOperation < 1 || proyectOperation > (proyectsList.size() + 1));
 
             System.out.println("///////////////////////////////////////");

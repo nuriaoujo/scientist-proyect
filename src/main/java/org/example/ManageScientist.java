@@ -90,7 +90,7 @@ public class ManageScientist {
             do{
                 this.proyectOperation = kb.nextInt();
                 if (proyectOperation < 1 || proyectOperation > (scientistsRegistrationList.size() + 1)) {
-                    System.out.println("El valor insertado no es válido, por favor inserte otro valor");
+                    System.out.println("El valor insertado no es válido, por favor inserte otro");
                 } else {
                     System.out.println("Nombre: " + scientistsRegistrationList.get(proyectOperation -1).getName());
                     System.out.println("Edad: " + scientistsRegistrationList.get(proyectOperation -1).getAge());
