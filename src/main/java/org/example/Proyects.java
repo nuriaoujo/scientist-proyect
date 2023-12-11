@@ -39,5 +39,11 @@ public class Proyects {
         this.scientistsList = scientistsList;
     }
 
+    public Integer budgetTotail(Integer duration, List<String> scientistsList) {
+        this.duration = duration;
+        this.scientistsList = scientistsList;
+
+        return this.budget = duration * scientistsList.size() * 5000;
+    }
 
 }
