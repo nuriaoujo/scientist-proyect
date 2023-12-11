@@ -10,6 +10,16 @@ public class AppLogic {
     ManageProyects manageProyects = new ManageProyects();
     ManageScientist manageScientist = new ManageScientist();
 
+
+    public int getProyectOperation() { return proyectOperation; }
+    public void setProyectOperation(int proyectOperation) { this.proyectOperation = proyectOperation; }
+
+    public ManageProyects getManageProyects() { return manageProyects; }
+    public void setManageProyects(ManageProyects manageProyects) { this.manageProyects = manageProyects; }
+
+    public ManageScientist getManageScientist() { return manageScientist; }
+    public void setManageScientist(ManageScientist manageScientist) { this.manageScientist = manageScientist; }
+
     public AppLogic() { }
 
     public void homeProyect() {
