@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManageScientist {
+    private Scientists scientists;
     private String scientistName;
     private String scientistsDirection;
     private Integer scientistAge;
@@ -15,7 +16,24 @@ public class ManageScientist {
 
     private List<Scientists> scientistsRegistrationList = new ArrayList<>();
 
-    private Scientists scientists;
+    public Scientists getScientists() { return scientists; }
+    public void setScientists(Scientists scientists) { this.scientists = scientists; }
+
+    public String getScientistName() { return scientistName; }
+    public void setScientistName(String scientistName) { this.scientistName = scientistName; }
+
+    public String getScientistsDirection() { return scientistsDirection; }
+    public void setScientistsDirection(String scientistsDirection) { this.scientistsDirection = scientistsDirection; }
+
+    public Integer getScientistAge() { return scientistAge; }
+    public void setScientistAge(Integer scientistAge) { this.scientistAge = scientistAge; }
+
+    public int getProyectOperation() { return proyectOperation; }
+    public void setProyectOperation(int proyectOperation) { this.proyectOperation = proyectOperation; }
+
+    public List<Scientists> getScientistsRegistrationList() { return scientistsRegistrationList; }
+    public void setScientistsRegistrationList(List<Scientists> scientistsRegistrationList) { this.scientistsRegistrationList = scientistsRegistrationList; }
+
     public ManageScientist() { }
 
     public void registerNewScientist() {

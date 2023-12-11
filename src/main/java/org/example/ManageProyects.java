@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class ManageProyects {
     private Proyects newproyect;
+    private ManageScientist manageScientist;
     private String proyectName;
     private String departmentName;
     private int proyectDepartment;
@@ -16,6 +17,7 @@ public class ManageProyects {
     private Scanner kb = new Scanner(System.in);
     private Scanner kbTxt = new Scanner(System.in);
     private List<Proyects> proyectsList = new ArrayList<>();
+    private List<Scientists> proyectsScientist;
 
     public ManageProyects() {}
 
@@ -75,21 +77,6 @@ public class ManageProyects {
             }
         } while (proyectOperation != 1 || proyectDepartment < 1 || proyectDepartment > 3);
 
-        do { //Proyect budget
-            System.out.println("Inserta el presupuesto de tu proyecto");
-            this.proyectBudget = kb.nextInt();
-            System.out.println( "El presupuesto insertado es: " + proyectBudget + ",\n" +
-                    "¿Estás seguro de este presupuesto?"
-            );
-            System.out.println("SI(1), NO(2)");
-            this.proyectOperation = kb.nextInt();
-
-            if(this.proyectOperation == 1) {
-                System.out.println("El presupuesto ha sido insertado exitósamente");
-                System.out.println("///////////////////////////////////////");
-            }
-        } while (proyectOperation != 1);
-
         do { //Proyect duration
             System.out.println("Inserta la duración del proyecto (en meses)");
             this.proyectDuration = kb.nextInt();
@@ -109,9 +96,16 @@ public class ManageProyects {
         System.out.println("Selecciona el/los científicos del proyecto");
         System.out.println("/////////////////////EN PROCESO/////////////////////");
 
+        this.proyectsScientist = new ArrayList<>();
+        proyectsScientist.add(merda);
+
         System.out.println("El científico ha sido registrado exitósamente");
         System.out.println("///////////////////////////////////////");
-        this.newproyect = new Proyects(proyectName, departmentName, proyectBudget, proyectDuration, null);
+
+        //Budget calculation
+        return this.proyectBudget = proyectDuration * scientistsList.size() * 5000;
+
+                this.newproyect = new Proyects(proyectName, departmentName, proyectBudget, proyectDuration, null);
         proyectsList.add(newproyect);
         System.out.println("Registrando nuevo proyecto...");
         System.out.println("El proyecto " + newproyect.getName() + " ha sido registrado exitósamente");
