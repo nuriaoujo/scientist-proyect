@@ -11,8 +11,8 @@ public class ManageScientist {
     private Integer scientistAge;
     private int proyectOperation;
 
-    private Scanner kb = new Scanner(System.in);
-    private Scanner kbTxt = new Scanner(System.in);
+    private final Scanner kb = new Scanner(System.in);
+    private final Scanner kbTxt = new Scanner(System.in);
 
     private List<Scientists> scientistsRegistrationList = new ArrayList<>();
 
@@ -34,7 +34,8 @@ public class ManageScientist {
     public List<Scientists> getScientistsRegistrationList() { return scientistsRegistrationList; }
     public void setScientistsRegistrationList(List<Scientists> scientistsRegistrationList) { this.scientistsRegistrationList = scientistsRegistrationList; }
 
-    public ManageScientist() { }
+    public ManageScientist(AppLogic appLogic) {
+    }
 
     public void registerNewScientist() {
         System.out.println("Registrando un nuevo científico...");

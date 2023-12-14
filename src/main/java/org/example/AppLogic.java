@@ -6,9 +6,8 @@ public class AppLogic {
     private Scanner kb = new Scanner(System.in);
     private int proyectOperation;
 
-
-    ManageProyects manageProyects = new ManageProyects();
-    ManageScientist manageScientist = new ManageScientist();
+    ManageProyects manageProyects;
+    ManageScientist manageScientist;
 
 
     public int getProyectOperation() { return proyectOperation; }
@@ -20,7 +19,10 @@ public class AppLogic {
     public ManageScientist getManageScientist() { return manageScientist; }
     public void setManageScientist(ManageScientist manageScientist) { this.manageScientist = manageScientist; }
 
-    public AppLogic() { }
+    public AppLogic() {
+        manageProyects = new ManageProyects(this);
+        manageScientist = new ManageScientist(this);
+    }
 
     public void homeProyect() {
         System.out.println( "Bienvenido al gestor de proyectos científicos. \n" +

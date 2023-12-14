@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class ManageProyects {
     private Proyects newproyect;
-    private ManageScientist manageScientist;
     private AppLogic appLogic;
     private String proyectName;
     private String departmentName;
@@ -20,7 +19,9 @@ public class ManageProyects {
     private List<Proyects> proyectsList = new ArrayList<>();
     private List<String> proyectsScientist;
 
-    public ManageProyects() {}
+    public ManageProyects(AppLogic appLogic) {
+        this.appLogic = appLogic;
+    }
 
     public void createNewProyect() {
         System.out.println("Creando un nuevo proyecto...");
@@ -94,10 +95,9 @@ public class ManageProyects {
         } while (proyectOperation != 1);
 
         //Científicos en proceso!!
-        System.out.println("Selecciona el/los científicos del proyecto");
-        System.out.println("/////////////////////EN PROCESO/////////////////////");
+        System.out.println("Selecciona el científico del proyecto");
 
-        if (manageScientist.getScientistsRegistrationList().isEmpty()) {
+        if (appLogic.getManageScientist().getScientistsRegistrationList().isEmpty()) {
             System.out.println( "ERROR: No existe ningún científico registrado, \n" +
                                 "¿Quieres registrar un científico?");
             System.out.println("SI(1), NO(2)");
@@ -105,7 +105,7 @@ public class ManageProyects {
             do {
                 this.proyectOperation = kb.nextInt();
                 if(proyectOperation == 1) {
-                    manageScientist.registerNewScientist();
+                    appLogic.getManageScientist().registerNewScientist();
                 } else {
                     System.out.println( "No se puede completar el registro del proyecto, \n" +
                                         "serás redirigido al inicio");
@@ -117,21 +117,21 @@ public class ManageProyects {
         //One scientist
         System.out.println("Selecciona el científico que deseas registrar");
         do {
-            for(int i = 0; i < manageScientist.getScientistsRegistrationList().size(); i++) {
+            for(int i = 0; i < appLogic.getManageScientist().getScientistsRegistrationList().size(); i++) {
                 System.out.println("( " +  (i + 1) + " ). " +
-                        manageScientist.getScientistsRegistrationList().get(i).getName() + ", " +
-                        manageScientist.getScientistsRegistrationList().get(i).getAge() + ", " +
-                        manageScientist.getScientistsRegistrationList().get(i).getAddress()
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getName() + ", " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAge() + ", " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAddress()
                 );
             }
             this.proyectOperation = kb.nextInt();
-            if (proyectOperation < 1 || proyectOperation > manageScientist.getScientistsRegistrationList().size() + 1) {
+            if (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1) {
                 System.out.println("El valor seleccionado no es válido");
             }
-        } while (proyectOperation < 1 || proyectOperation > manageScientist.getScientistsRegistrationList().size() + 1);
+        } while (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1);
 
         this.proyectsScientist = new ArrayList<>();
-        proyectsScientist.add(manageScientist.getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        proyectsScientist.add(appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
 
         System.out.println("El científico ha sido registrado exitósamente");
         System.out.println("///////////////////////////////////////");
@@ -171,6 +171,10 @@ public class ManageProyects {
                     System.out.println("Presupuesto: " + proyectsList.get(proyectOperation - 1).getBudget());
                     System.out.println("Duración: " + proyectsList.get(proyectOperation - 1).getDuration());
                     System.out.println("Científicos: ");
+
+                    for(int i = 0; i < proyectsList.get(proyectOperation - 1).getScientistsList().size(); i++) {
+                        System.out.println("- "+ proyectsList.get(proyectOperation - 1).getScientistsList().get(i));
+                    }
                 }
             } while( proyectOperation < 1 || proyectOperation > (proyectsList.size() + 1));
 
