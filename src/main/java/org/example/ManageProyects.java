@@ -13,6 +13,7 @@ public class ManageProyects {
     private int proyectBudget;
     private int proyectDuration;
     private int proyectOperation;
+    private int scientistOperation;
 
     private Scanner kb = new Scanner(System.in);
     private Scanner kbTxt = new Scanner(System.in);
@@ -89,12 +90,11 @@ public class ManageProyects {
             this.proyectOperation = kb.nextInt();
 
             if(this.proyectOperation == 1) {
-                System.out.println("La duración ha sido insertado exitósamente");
+                System.out.println("La duración ha sido insertada exitósamente");
                 System.out.println("///////////////////////////////////////");
             }
         } while (proyectOperation != 1);
 
-        //Científicos en proceso!!
         System.out.println("Selecciona el científico del proyecto");
 
         if (appLogic.getManageScientist().getScientistsRegistrationList().isEmpty()) {
@@ -114,35 +114,90 @@ public class ManageProyects {
             } while (proyectOperation < 1 || proyectOperation > 2);
         }
 
-        //One scientist
-        System.out.println("Selecciona el científico que deseas registrar");
+        System.out.println( "¿Cuántos científicos deseas registrar? \n" +
+                            "1. Un científico \n" +
+                            "2. Dos científicos \n" +
+                            "3. Tres científicos"
+        );
         do {
-            for(int i = 0; i < appLogic.getManageScientist().getScientistsRegistrationList().size(); i++) {
-                System.out.println("( " +  (i + 1) + " ). " +
-                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getName() + ", " +
-                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAge() + ", " +
-                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAddress()
-                );
-            }
-            this.proyectOperation = kb.nextInt();
-            if (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1) {
-                System.out.println("El valor seleccionado no es válido");
-            }
-        } while (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1);
+            proyectOperation = kb.nextInt();
 
-        this.proyectsScientist = new ArrayList<>();
-        proyectsScientist.add(appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+            switch (proyectOperation) {
+                case 1:
+                    System.out.println("Has seleccionado: Registrar un científico");
+                    System.out.println("///////////////////////////////////////");
+                    if (!appLogic.getManageScientist().getScientistsRegistrationList().isEmpty()) {
+                        insertOneScientist();
+                    } else {
+                        System.out.println("ERROR, no tienes científicos registrados, serás redirigido al menú de inicio");
+                        appLogic.homeProyect();
+                    }
+                    break;
+                case 2:
+                    System.out.println("Has seleccionado: Registrar dos científicos");
+                    System.out.println("///////////////////////////////////////");
+                    if (appLogic.getManageScientist().getScientistsRegistrationList().size() >= 2) {
+                        insertTwoScientists();
+                    } else if(!appLogic.getManageScientist().getScientistsRegistrationList().isEmpty()){
+                        System.out.println("ERROR, no tienes registrados suficientes científicos, \n" +
+                                "¿Deseas registrar únicamente un científico?"
+                        );
+                        System.out.println("SI(1), NO(2)");
+                        scientistOperation = kb.nextInt();
+                        if(scientistOperation == 1) {
+                            insertOneScientist();
+                        } else {
+                            appLogic.homeProyect();
+                        }
+                    } else {
+                        System.out.println("ERROR, no tienes científicos registrados, serás redirigido al menú de inicio");
+                        appLogic.homeProyect();
+                    }
+                    break;
+                case 3:
+                    System.out.println("Has seleccionado: Registrar tres científicos");
+                    System.out.println("///////////////////////////////////////");
+                    if (appLogic.getManageScientist().getScientistsRegistrationList().size() >= 3) {
+                        insertThreeScientists();
+                    } else if(!appLogic.getManageScientist().getScientistsRegistrationList().isEmpty()){
+                        System.out.println("ERROR, no tienes registrados suficientes científicos, \n" +
+                                            "¿Deseas registrar únicamente un científico?"
+                        );
+                        System.out.println("SI(1), NO(2)");
+                        scientistOperation = kb.nextInt();
+                        if(scientistOperation == 1) {
+                            insertOneScientist();
+                        } else {
+                            appLogic.homeProyect();
+                        }
+                    } else {
+                        System.out.println("ERROR, no tienes científicos registrados, serás redirigido al menú de inicio");
+                        appLogic.homeProyect();
+                    }
+                    break;
+                default:
+                    System.out.println("ERROR: El valor seleccionado no existe");
+                    break;
+            }
 
-        System.out.println("El científico ha sido registrado exitósamente");
-        System.out.println("///////////////////////////////////////");
+            if(proyectOperation == 1) {
+                System.out.println("El científico ha sido registrado exitósamente");
+                System.out.println("///////////////////////////////////////");
+            } else if (proyectOperation == 2 || proyectOperation == 3) {
+                System.out.println("Los científicos han sido registrados exitósamente");
+                System.out.println("///////////////////////////////////////");
+            }
+        } while (proyectOperation < 1 || proyectOperation > 3);
 
         //Budget calculation
         System.out.println("Calculando el presupuesto del proyecto...");
         this.proyectBudget = proyectDuration * proyectsScientist.size() * 5000;
+        System.out.println("Este es el presupuesto del proyecto: " + proyectBudget);
         System.out.println("El presupuesto ha sido calculado correctamente");
 
         this.newproyect = new Proyects(proyectName, departmentName, proyectBudget, proyectDuration, proyectsScientist);
         proyectsList.add(newproyect);
+        System.out.println("///////////////////////////////////////");
         System.out.println("Registrando nuevo proyecto...");
         System.out.println("El proyecto " + newproyect.getName() + " ha sido registrado exitósamente");
         System.out.println("///////////////////////////////////////");
@@ -187,6 +242,98 @@ public class ManageProyects {
                 System.out.println("...");
                 showProyectDetails();
             }
+        }
+    }
+
+    public void insertOneScientist(){
+        System.out.println("Selecciona el científico que deseas registrar");
+        do {
+            for(int i = 0; i < appLogic.getManageScientist().getScientistsRegistrationList().size(); i++) {
+                System.out.println("( " +  (i + 1) + " ). " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getName() + ", " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAge() + ", " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAddress()
+                );
+            }
+            this.proyectOperation = kb.nextInt();
+            if (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1) {
+                System.out.println("El valor seleccionado no es válido");
+            }
+        } while (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1);
+
+        System.out.println("¿Estás seguro en querer registrar a " + appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        System.out.println("SI(1), NO(2)");
+        scientistOperation = kb.nextInt();
+        if(scientistOperation == 1) {
+            this.proyectsScientist = new ArrayList<>();
+            proyectsScientist.add(appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        } else {
+            insertOneScientist();
+        }
+    }
+
+    public void insertTwoScientists() {
+        System.out.println("Selecciona el primer científico que deseas registrar");
+        do {
+            for(int i = 0; i < appLogic.getManageScientist().getScientistsRegistrationList().size(); i++) {
+                System.out.println("( " +  (i + 1) + " ). " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getName() + ", " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAge() + ", " +
+                        appLogic.getManageScientist().getScientistsRegistrationList().get(i).getAddress()
+                );
+            }
+            this.proyectOperation = kb.nextInt();
+            if (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1) {
+                System.out.println("El valor seleccionado no es válido");
+            }
+        } while (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1);
+
+        System.out.println("¿Estás seguro en querer registrar a " + appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        System.out.println("SI(1), NO(2)");
+        scientistOperation = kb.nextInt();
+        if(scientistOperation == 1) {
+            this.proyectsScientist = new ArrayList<>();
+            proyectsScientist.add(appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        } else {
+            insertOneScientist();
+        }
+
+        System.out.println("Selecciona el segundo científico que deseas registrar");
+        do {
+            this.proyectOperation = kb.nextInt();
+            if (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1) {
+                System.out.println("El valor seleccionado no es válido");
+            }
+        } while (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1);
+
+        System.out.println("¿Estás seguro en querer registrar a " + appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        System.out.println("SI(1), NO(2)");
+        scientistOperation = kb.nextInt();
+        if(scientistOperation == 1) {
+            proyectsScientist.add(appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        } else {
+            insertOneScientist();
+        }
+    }
+
+    public void insertThreeScientists() {
+        insertTwoScientists();
+
+        System.out.println("Selecciona el tercer científico que deseas registrar");
+        do {
+            this.proyectOperation = kb.nextInt();
+            if (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1) {
+                System.out.println("El valor seleccionado no es válido");
+            }
+        } while (proyectOperation < 1 || proyectOperation > appLogic.getManageScientist().getScientistsRegistrationList().size() + 1);
+
+        System.out.println("¿Estás seguro en querer registrar a " + appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        System.out.println("SI(1), NO(2)");
+        scientistOperation= kb.nextInt();
+        if(scientistOperation == 1) {
+            proyectsScientist.add(appLogic.getManageScientist().getScientistsRegistrationList().get(proyectOperation - 1).getName());
+        } else {
+            insertOneScientist();
         }
     }
 }
